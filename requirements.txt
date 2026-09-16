@@ -1,4 +1,5 @@
 fastapi
-uvicorn
+uvicorn[standard]
 ultralytics
 opencv-python-headless
+numpy
