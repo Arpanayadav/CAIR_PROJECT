@@ -44,6 +44,8 @@ def generate_tactical_stream():
         print(f"Unable to open video source: {source}")
         return
 
+    frame_count = 0
+
     while cap.isOpened():
 
         success, frame = cap.read()
@@ -57,6 +59,10 @@ def generate_tactical_stream():
 
             break
 
+        frame_count += 1
+
+        if frame_count % 3 != 0:
+            continue
 
         start_time = time.perf_counter()
 
@@ -69,6 +75,8 @@ def generate_tactical_stream():
         results = model(
             processed_frame,
             classes=TACTICAL_CLASSES,
+            imgsz=320,
+            device="cpu",
             verbose=False
         )
 
